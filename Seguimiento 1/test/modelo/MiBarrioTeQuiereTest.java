@@ -9,22 +9,22 @@ import exceptions.WrongDayException;
 
 public class MiBarrioTeQuiereTest {
 
-	private MiBarrioTeQuiere miBarrio;
+	private MiBarrioTeQuiere miBarrioTest;
 
 
 	// Tener en cuenta que los numeros de documentos elegidos para las pruebas
 	// estan pensados para pasarlas correctamente en un dia par 
 	public void setupScenary1() {
 
-		miBarrio = new MiBarrioTeQuiere();	
+		miBarrioTest = new MiBarrioTeQuiere();	
 	}
 
 	public void setupScenary2() {
 		try {
-			miBarrio = new MiBarrioTeQuiere();	
-			miBarrio.registrarPersona("cc", 116692);
-			miBarrio.registrarPersona("cc", 116692);
-			miBarrio.registrarPersona("cc", 116692);
+			miBarrioTest = new MiBarrioTeQuiere();	
+			miBarrioTest.registrarPersona("cc", 15194);
+			miBarrioTest.registrarPersona("cp", 13572);
+			miBarrioTest.registrarPersona("ce", 452155);
 
 		}catch(UnderageException uae) {
 			fail("");
@@ -35,17 +35,17 @@ public class MiBarrioTeQuiereTest {
 	}
 
 	@Test
-	void testRegistrarPersona_1() {
+	public void testRegistrarPersona_1() {
 		setupScenary1();
 
 		try {
-			miBarrio.registrarPersona("cc", 10034);
-			miBarrio.registrarPersona("ce", 144494);
+			miBarrioTest.registrarPersona("cc", 10034);
+			miBarrioTest.registrarPersona("ce", 144494);
 
-			assertEquals("cc", miBarrio.getPersonas().get(0).getTipoDoc());
-			assertEquals(10034, miBarrio.getPersonas().get(0).getNumero());
-			assertEquals("ce", miBarrio.getPersonas().get(1).getTipoDoc());
-			assertEquals(144494, miBarrio.getPersonas().get(1).getNumero());
+			assertEquals("cc", miBarrioTest.getPersonas().get(0).getTipoDoc());
+			assertEquals(10034, miBarrioTest.getPersonas().get(0).getNumero());
+			assertEquals("ce", miBarrioTest.getPersonas().get(1).getTipoDoc());
+			assertEquals(144494, miBarrioTest.getPersonas().get(1).getNumero());
 
 
 		}catch(WrongDayException wre) {
@@ -57,33 +57,33 @@ public class MiBarrioTeQuiereTest {
 
 
 	@Test
-	void testRegistrarPersona_2() {
+	public void testRegistrarPersona_2() {
 		setupScenary2();
-		int agregados = miBarrio.getPersonas().size();
+		int agregados = miBarrioTest.getPersonas().size();
 		try {
-			miBarrio.registrarPersona("ti", 10034);
+			miBarrioTest.registrarPersona("ti", 14592);
 			fail("UnderageException was expected here ");
 
 
 		}catch(WrongDayException wre) {
 			fail("WrongDayException was not expected here");
 		}catch(UnderageException uae) {
-			assertTrue(agregados == miBarrio.getPersonas().size(),"The person shouldn't have been added");
+			assertTrue(agregados == miBarrioTest.getPersonas().size(),"The person shouldn't have been added");
 		}		
 	}
 
 
 	@Test
-	void testRegistrarPersona_3() {
+	public void testRegistrarPersona_3() {
 		setupScenary2();
-		int agregados = miBarrio.getPersonas().size();
+		int agregados = miBarrioTest.getPersonas().size();
 		try {
-			miBarrio.registrarPersona("cc", 10024); 
+			miBarrioTest.registrarPersona("cc", 10024); 
 			fail("WrongDayException was expected here ");
 
 
 		}catch(WrongDayException wre) {
-			assertTrue(agregados == miBarrio.getPersonas().size(),"The person shouldn't have been added because of the law");
+			assertTrue(agregados == miBarrioTest.getPersonas().size(),"The person shouldn't have been added because of the law");
 		}catch(UnderageException uae) {
 			fail("UnderageException was not expected here");
 		}		
