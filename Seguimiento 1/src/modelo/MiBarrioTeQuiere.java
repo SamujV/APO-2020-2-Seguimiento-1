@@ -2,7 +2,8 @@ package modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import exceptions.UnderageException;
+import exceptions.WrongDayException;
 public class MiBarrioTeQuiere {
 	public static final String TI = "ti";
 	public static final String CC = "cc";
@@ -20,20 +21,24 @@ public class MiBarrioTeQuiere {
 	}
 	
 	
-	public void registrarPersona(String tipoDoc, int numero) {
-		
+	public void registrarPersona(String tipoDoc, int numero) throws  WrongDayException, UnderageException{
+
+		intentosDeIngreso++;
 		String a = numero + "";
 		int penultimoNum = Integer.parseInt(a.substring(a.length()-2,a.length()-1));
 		
-		if(tipoDoc != TI) {
+		if(!tipoDoc.equalsIgnoreCase(TI)) {
 			Persona p = new Persona(tipoDoc,numero);
 			if(penultimoNum % 2 == 0 && diaDelMes % 2 == 1 ) {
 				personas.add(p);
 			}else if(penultimoNum % 2 == 1 && diaDelMes % 2 == 0) {
 				personas.add(p);
-			}			
-		}		
-		intentosDeIngreso++;
+			}else {
+				throw new WrongDayException();
+			}
+		}else {
+			throw new UnderageException();
+		}
 	}
 	
 	
