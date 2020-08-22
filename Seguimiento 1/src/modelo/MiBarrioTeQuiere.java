@@ -10,7 +10,7 @@ public class MiBarrioTeQuiere {
 	public static final String PP = "pp";
 	public static final String CE = "ce";
 	List<Persona> personas ;
-	
+
 	private int intentosDeIngreso;
 	private int diaDelMes;
 
@@ -19,14 +19,14 @@ public class MiBarrioTeQuiere {
 		diaDelMes = LocalDate.now().getDayOfMonth();
 		intentosDeIngreso = 0;
 	}
-	
-	
+
+
 	public void registrarPersona(String tipoDoc, int numero) throws  WrongDayException, UnderageException{
 
 		intentosDeIngreso++;
 		String a = numero + "";
 		int penultimoNum = Integer.parseInt(a.substring(a.length()-2,a.length()-1));
-		
+
 		if(!tipoDoc.equalsIgnoreCase(TI)) {
 			Persona p = new Persona(tipoDoc,numero);
 			if(penultimoNum % 2 == 0 && diaDelMes % 2 == 1 ) {
@@ -40,19 +40,19 @@ public class MiBarrioTeQuiere {
 			throw new UnderageException();
 		}
 	}
-	
-	
+
+
 	public int ConsultarIntentos() {
 		return intentosDeIngreso;
 	}
-	
+
 	public List<Persona> getPersonas(){
 		return personas;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }
