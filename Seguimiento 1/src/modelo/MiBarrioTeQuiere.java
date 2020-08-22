@@ -46,7 +46,9 @@ public class MiBarrioTeQuiere {
 		return intentosDeIngreso;
 	}
 	
-	
+	public List<Persona> getPersonas(){
+		return personas;
+	}
 	
 	
 	
